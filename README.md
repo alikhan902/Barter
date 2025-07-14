@@ -6,5 +6,5 @@ python manage.py makemigrations
 python manage.py migrate
 4. Запустить проект командой
 python manage.py runserver
-///
+
 Для запуска тестов ввести команду python manage.py test
