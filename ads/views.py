@@ -5,21 +5,22 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .pagination import AdPagination
 from .models import Ad, ExchangeProposal
-from .serializers import AdSerializer, ExchangeProposalSerializer, RegisterSerializer
+from .serializers import AdSerializer, ProposalSerializer, RegisterSerializer
 from rest_framework.response import Response
 from rest_framework import status, filters, viewsets
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsNotAuthenticated
+from .permissions import IsNotAuthenticated, IsOwnerOrReadOnly
+from rest_framework import filters as drf_filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 class AdAPI(viewsets.ModelViewSet):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly] 
     pagination_class = AdPagination
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'description']  
-    ordering_fields = ['created_at']  
-    ordering = ['-created_at']  
+    filter_backends = [DjangoFilterBackend, drf_filters.SearchFilter]
+    filterset_fields = ['category', 'condition']
+    search_fields = ['title', 'description']
     
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -32,11 +33,18 @@ class AdAPI(viewsets.ModelViewSet):
     
 class ExchangeProposalAPI(viewsets.ModelViewSet):
     queryset = ExchangeProposal.objects.all()
-    serializer_class = ExchangeProposalSerializer    
+    serializer_class = ProposalSerializer    
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['ad_sender', 'ad_receiver', 'status']
     
     def get_queryset(self):
-        return ExchangeProposal.objects.filter(ad_receiver__user=self.request.user)
+        user = self.request.user
+        if user.is_superuser:
+            return ExchangeProposal.objects.all()
+        else:
+            return ExchangeProposal.objects.filter(ad_receiver__user=user)
+
     
 class RegisterView(CreateAPIView):
     queryset = User.objects.all()

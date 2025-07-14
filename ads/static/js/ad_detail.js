@@ -23,6 +23,7 @@ async function loadAdDetail() {
                     <h3 class="card-title">${ad.title}</h3>
                     <p class="card-text">${ad.description}</p>
                     <p class="text-muted">Категория: ${ad.category}</p>
+                    <p class="text-muted">Состояние: ${ad.condition}</p>
                 </div>
             </div>
         `;

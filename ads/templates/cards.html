@@ -5,13 +5,26 @@
 {% block content %}
 <h2 class="mb-4">Объявления</h2>
 
-<form id="filter-form" class="mb-4 d-flex gap-2">
-  <input type="text" id="search-input" placeholder="Поиск..." class="form-control" />
-  <select id="ordering-select" class="form-select" style="width: 180px;">
-    <option value="-created_at" selected>Сначала новые</option>
-    <option value="created_at">Сначала старые</option>
+<form id="filter-form" class="mb-4 row row-cols-1 row-cols-md-auto g-2 align-items-center">
+  <div class="col">
+    <input type="text" id="search-input" placeholder="Поиск..." class="form-control" />
+  </div>
+  <div class="col">
+  <select id="condition-select" class="form-select">
+    <option value="">Любое состояние</option>
+    <option value="Новый">Новое</option>
+    <option value="Б/У">Б/у</option>
   </select>
-  <button type="submit" class="btn btn-primary">Применить</button>
+</div>
+
+  <div class="col">
+    <input type="text" id="category-input" placeholder="Категория" class="form-control" />
+  </div>
+  <div class="col">
+</div>
+  <div class="col">
+    <button type="submit" class="btn btn-primary">Применить</button>
+  </div>
 </form>
 
 <div id="ads-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4"></div>

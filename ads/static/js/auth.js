@@ -83,7 +83,7 @@ function initRegisterForm() {
 
         if (ok) {
             resultDiv.innerHTML = '<div class="alert alert-success">Пользователь зарегистрирован!</div>';
-            form.reset();
+            setTimeout(() => { window.location.href = '/'; }, 1000);
         } else {
             let messages = '';
             for (const errors of Object.values(result)) {
@@ -91,6 +91,9 @@ function initRegisterForm() {
             }
 
             resultDiv.innerHTML = `<div class="alert alert-danger">${messages}</div>`;
+            setTimeout(() => {
+                submitBtn.disabled = false; 
+            }, 3000);
         }
     });
 }

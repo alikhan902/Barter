@@ -21,6 +21,14 @@
         <input type="text" class="form-control" id="category" name="category" required maxlength="50">
     </div>
     <div class="mb-3">
+        <label for="condition" class="form-label">Состояние</label>
+        <select class="form-select" id="condition" name="condition" required>
+            <option value="">Выберите состояние</option>
+            <option value="Новый">Новое</option>
+            <option value="Б/У">Б/у</option>
+        </select>
+    </div>
+    <div class="mb-3">
         <label for="image" class="form-label">Изображение</label>
         <input type="file" class="form-control" id="image" name="image_url" accept="image/*">
     </div>

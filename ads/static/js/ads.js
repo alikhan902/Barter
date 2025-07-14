@@ -62,12 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('filter-form').addEventListener('submit', e => {
         e.preventDefault();
-        const search = document.getElementById('search-input').value.trim();
-        const ordering = document.getElementById('ordering-select').value;
 
-        let url = `/api/Ad/?ordering=${encodeURIComponent(ordering)}`;
-        if (search) url += `&search=${encodeURIComponent(search)}`;
+        const search = document.getElementById('search-input')?.value.trim();
+        const ordering = document.getElementById('ordering-select')?.value;
+        const category = document.getElementById('category-input')?.value.trim();
+        const condition = document.getElementById('condition-select')?.value;
 
+        const params = new URLSearchParams();
+        if (search) params.append('search', search);
+        if (ordering) params.append('ordering', ordering);
+        if (category) params.append('category', category);
+        if (condition) params.append('condition', condition);
+
+        const url = `/api/Ad/?${params.toString()}`;
         loadAds(url);
     });
 });

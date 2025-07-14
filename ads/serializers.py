@@ -9,7 +9,7 @@ class AdSerializer(serializers.ModelSerializer):
         model = Ad
         fields = '__all__'
 
-class ExchangeProposalSerializer(serializers.ModelSerializer):
+class ProposalSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExchangeProposal
         fields = '__all__'
