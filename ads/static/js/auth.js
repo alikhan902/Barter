@@ -117,7 +117,6 @@ function initLogoutButton() {
 }
 
 
-// Автоматический запуск для обеих форм, если они есть
 document.addEventListener('DOMContentLoaded', () => {
     initLoginForm();
     initRegisterForm();

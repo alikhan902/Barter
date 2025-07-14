@@ -80,7 +80,6 @@ async function fetchAd(id) {
         document.getElementById('status-message').innerHTML =
             `<div class="alert alert-success">Статус обновлён на: <strong>${newStatus}</strong></div>`;
 
-        // Обновляем страницу через 1 секунду
         setTimeout(() => location.reload(), 1000);
 
     } catch (error) {

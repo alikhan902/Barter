@@ -30,7 +30,6 @@ async function loadAds() {
             container.appendChild(col);
         });
 
-        // Обработчики кнопок удаления (без подтверждения)
         document.querySelectorAll('.delete-btn').forEach(button => {
             button.addEventListener('click', async (e) => {
                 const id = e.target.getAttribute('data-id');
