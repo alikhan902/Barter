@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Просмотр предложения{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Предложение обмена</h2>
+
+<div id="proposal-container" class="row">
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+{{ block.super }}
+<script src="{% static 'js/ep_detail.js' %}"></script>
+{% endblock %}

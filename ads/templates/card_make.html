@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Создать объявление{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Создание объявления</h2>
+
+<form id="ad-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Название</label>
+        <input type="text" class="form-control" id="title" name="title" required maxlength="50">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Описание</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required maxlength="250"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="category" class="form-label">Категория</label>
+        <input type="text" class="form-control" id="category" name="category" required maxlength="50">
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Изображение</label>
+        <input type="file" class="form-control" id="image" name="image_url" accept="image/*">
+    </div>
+    <button type="submit" class="btn btn-primary">Создать</button>
+</form>
+
+<div id="result" class="mt-3"></div>
+{% endblock %}
+
+{% block extra_scripts %}
+{{ block.super }}
+    <script src="{% static 'js/ad_form.js' %}"></script>
+{% endblock %}
